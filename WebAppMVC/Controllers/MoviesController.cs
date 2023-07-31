@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using WebAppMVC.Models;
+using WebAppMVC.ViewModel;
 
 namespace WebAppMVC.Controllers
 {
@@ -19,13 +20,29 @@ namespace WebAppMVC.Controllers
         }
         public ActionResult Random()
         {
-            var movie = new Movies() {Name="Power of Learning .net core MVC" };
-            return RedirectToAction("Index", "Home", new {page=1,sortBy="name" });
+            var movie = new Movies() { Name = "Power of Learning .net core MVC" };
+            var customersList = new List<Customers>
+            {
+                new Customers {Name="Customers 1"},
+                new Customers {Name="Customers 2"}
+            };
+            var ranViewModel = new RandomViewModel()
+            {
+                movies = movie,
+                customers = customersList
+            };
+            return View(ranViewModel);
         }
 
         public ActionResult Edit(int id)
         {
             return Content($"id ={id} this is power of learning");
         }
+        [Route("Movies/released/{month}")]
+        public ActionResult newRoute(int? month)
+        {
+            return Content($"month ={month} new route  this is power of learning");
+        }
+
     }
 }

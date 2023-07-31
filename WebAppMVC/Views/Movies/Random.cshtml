@@ -1,8 +1,26 @@
-﻿@model WebAppMVC.Models.Movies
+﻿@model WebAppMVC.ViewModel.RandomViewModel
 @{
     ViewData["Title"] = "Random";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h1>@Model.Name</h1>
-
+@*
+    this is a comment.
+*@
+@{ 
+    var className = Model.customers.Count > 10 ? "popular" : null;
+}
+<h1 class="@className">@Model.movies.Name</h1>
+@if(Model.customers.Count == 0)
+{
+    <h1>no one has been rented this movie</h1>
+}
+else
+{ 
+<ul>
+    @foreach (var item in Model.customers)
+    {
+      <li>@item.Name</li>
+    }
+</ul>
+  
+}
