@@ -9,5 +9,7 @@ namespace WebAppMVC.Models
     {
         public int Id { get; set; }
         public string Name { get; set; }
+        public List<Movies> ListMovie  { get; set; }
+         
     }
 }

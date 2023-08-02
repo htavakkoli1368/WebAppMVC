@@ -10,13 +10,29 @@ namespace WebAppMVC.Controllers
 {
     public class MoviesController : Controller
     {
-        public ActionResult Index (int? pageIndex,string sortBy)
+        public ActionResult Index ()
         {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
-            if (String.IsNullOrWhiteSpace(sortBy))
-                sortBy = "Name";
-            return Content($"pageindex is ={pageIndex} and sort by {sortBy}");
+
+            var listmovie = GetCustomers();
+            var lst = new Movies() { ListMovie = listmovie };
+            return View(lst) ;
+        }
+        public ActionResult Details(int id)
+        {
+            var film = GetCustomers().SingleOrDefault(c => c.Id == id);
+
+            if (film == null)
+                return Content("it does not found");
+
+            return View(film);
+        }
+        private List<Movies> GetCustomers()
+        {
+            return new List<Movies> {
+                new Movies { Id=1,Name="John Wick 4"},
+                new Movies { Id=2,Name="Terminator"},
+                new Movies { Id=3,Name="Shrek"}
+            };
         }
         public ActionResult Random()
         {
